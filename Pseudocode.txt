@@ -1,0 +1,301 @@
+ **  ========================================================================= **
+ **   Author: Hans Wong - 20968560								 **
+ **   Date: 11/05/2023										 **
+ **  ========================================================================= **
+
+----------------------------------------------------------------------------------------------------
+
+
+CLASS LOCATION:
+    Attributes:
+        - latitude: double
+        - longtitude: double
+        - coordinateSystem: string     
+    Methods:
+        //Parameter Constructor
+        + Location(double latitude, double longtitude, string coordinateSystem)
+            set this.latitude = latitude
+            set this.longtitude = longtitude
+            set this.coordinateSystem = coordinateSystem
+
+        //Accessors (Getters)
+        + getLatitude(): double
+        + getLongtitude(): double
+        + getCoordinateSystem(): String
+
+        //Mutators (Setters)
+        + setLatitude(double latitude): void
+        + setLongtitude(double longtitude): void
+        + setCoordinateSystem(String coordinateSystem): void
+
+
+----------------------------------------------------------------------------------------------------
+
+
+CLASS PROJECT
+    Attributes:
+        province: string
+        beneficiary: string
+        beneficiaryNum: string
+        assetClass: string
+        name: string
+	  description: string
+        stage: string
+        location: Location object
+    
+    Methods:
+        // Parameter Constructor
+        + Project(string province, string beneficiary,
+                  string beneficiaryNum, string assetClass, 
+                  string name, string description,
+			string stage, Location location)
+                
+            set this.province = province
+            set this.beneficiary = beneficiary
+            set this.beneficiaryNum = beneficiaryNum
+            set this.assetClass = assetClass
+            set this.name = name
+		set this.description = description
+            set this.stage = stage
+            Location(latitude, longtitude, coordinateSystem)
+
+
+        // Accessors (Getters)
+        + getProvince(): string
+        + getBenificiary(): string
+        + getBeneficiaryNum(): string
+        + getAssetClass(): string
+        + getName(): string
+	  + getDescription(): string
+        + getStage(): string
+        + getLocation(): Location
+
+        // Mutators (Settes)
+        + setProvince(): void
+        + setBenificiary(): void
+        + setBeneficiaryNum(): void
+        + setAssetClass(): void
+        + setName(): void
+	  + setDescription(): void
+        + setStage(): void
+        + setLocation(): void
+
+
+----------------------------------------------------------------------------------------------------
+
+MAIN PROGRAM
+
+MAIN METHOD
+
+// Input csv file
+filename = "First_Nation_Infrastructure_Investment.csv"
+
+// Output log file
+logFile = "log.txt"
+
+Saves "Application started" into log.txt
+displayOpeningMenu(projects) to run the method
+Saves "Application ended" into log.txt
+
+----------------------------------------------------------------------------------------------------
+
+HELPER METHODS
+
+/*  -------------------------------------------------------------------------------------------
+     **   Method: loadProjectsFromCSV()
+     **      Import: projects (Project[])
+     **      Export: NONE
+     **   Assertion: Reads the data
+     **                  
+     */
+
+           FOR each line in file:
+                Reads first column and row for 10 data
+		    Hops onto next row after reading 10 data
+                INCREASE newProjects array by 1
+           RETURN projects
+
+
+/*  -------------------------------------------------------------------------------------------
+
+**   Method: writeLog(String message)
+     **      Import: filename (String)
+     **      Export: (none)
+     **   Assertion: Writing output to log file.
+     */
+
+    writingData(logFile, output):
+        try:
+            FileWriter = Filewriter(LOG_FILE_PATH, true)
+            writer.write(message)
+        except Exception e:
+            Exception
+
+/*  -------------------------------------------------------------------------------------------
+
+     **   Method: displayOpeningMenu()
+     **      Import: Project projects[], choice (int)
+     **      Export: (Project[])
+     **   Assertion: Displays option for user interface and input
+     */
+	
+do
+	// Print out MAIN MENU
+        PRINT OUT: "Welcome to the Investments in Indigenous community infrastructure Program.
+        PRINT OUT: "There are a total of ", projects.length, " projects throughout Canada.
+        PRINT OUT: "Please make a selection from the Menu below.
+        PRINT OUT:
+        PRINT OUT: "1. All of Canada
+        PRINT OUT: "2. Alberta
+        PRINT OUT: "3. British Columbia
+        PRINT OUT: "4. Manitoba
+        PRINT OUT: "5. New Brunswick
+        PRINT OUT: "6. Newfoundland and Labrador
+        PRINT OUT: "7. Nova Scotia
+        PRINT OUT: "8. Ontario
+        PRINT OUT: "9. Prince Edward Island
+        PRINT OUT: "10. Quebec
+        PRINT OUT: "11. Saskatchewan
+        PRINT OUT: "12. Northwest Territories
+        PRINT OUT: "13. Nunavut
+        PRINT OUT: "14. Yukon
+        PRINT OUT: "15. Exit Program
+        PRINT OUT:
+        PRINT OUT: "Enter your choice:
+
+	SWITCH CASE (choice):
+	  CASE 1: displayCanadaStatistics(projects)
+		break
+	  CASE 2: displayProvinceStatistics("Alberta", projects)
+		break
+	  CASE 3: displayProvinceStatistics("British Columbia", projects)
+		break
+	  CASE 4: displayProvinceStatistics("Manitoba", projects)
+		break
+	  CASE 5: displayProvinceStatistics("New Brunswick", projects)
+		break
+	  CASE 6: displayProvinceStatistics("Newfoundland and Labrador", projects)
+		break
+	  CASE 7: displayProvinceStatistics("Nova Scotia", projects);
+		break
+	  CASE 8: displayProvinceStatistics("Ontario", projects);
+		break
+	  CASE 9: displayProvinceStatistics("Prince Edward Island", projects);
+		break
+   	  CASE 10: displayProvinceStatistics("Quebec", projects);
+		break
+	  CASE 11: displayProvinceStatistics("Saskatchewan", projects);
+		break
+	  CASE 12: displayProvinceStatistics("Northwest Territories", projects);
+		break
+	  CASE 13: displayProvinceStatistics("Nunavut", projects);
+		break
+	  CASE 14: displayProvinceStatistics("Yukon", projects);
+		break
+	  CASE 15: PRINT OUT: "Exiting the program. . ."
+		RETURN
+	
+	IF CHOICE != 15
+	  PRINT OUT: "Invalid choice, please try again"
+
+/*  -------------------------------------------------------------------------------------------
+     **   Method: displayCanadaStatistics()
+     **      Import: projects (Project[]), totalProjects (int), ongoingProjects (int)
+     *               completedProjects (int), completedPercentage (double)
+     **      Export: (String)
+     **   Assertion: Print all of Canada's statistics and store all output in a variable.
+     */
+
+     FOR Project Array 
+		IF each row with "Ongoing"
+     			INCREASE ongoingProjects by 1
+		ELSE IF each row with "Completed"
+			INCREASE completedProjects by 1
+
+	  totalProjectsMessage = "Total number of projects in Canada: " + totalProjects;
+        ongoingProjectsMessage = "Total number of ongoing projects: " + ongoingProjects;
+        completedProjectsMessage = "Total number of completed projects: " + completedProjects;
+        completedPercentageMessage = "Percentage of completed projects: " + completedPercentage + "%";
+
+        PRINT OUT: (totalProjectsMessage)
+        PRINT OUT: (ongoingProjectsMessage)
+        PRINT OUT: (completedProjectsMessage)
+        PRINT OUT: (completedPercentageMessage)
+
+	  writeLog(totalProjectsMessage)
+	  writeLog(ongoingProjectsMessage)
+  	  writeLog(completedProjectsMessage)
+	  writeLog(completedPercentageMessage)
+
+/*  -------------------------------------------------------------------------------------------
+     **   Method: displayProvinceStatistics()
+     **      Import: projects (Project[]), province (String), totalProjects (int)
+			   projectsInProvince (int), ongoingProjects (int), completedProjects(int), choice (int)
+			   provincePercentage (double), provinceOngoingPercentage (double), provinceCompletedPercentage (double)
+     **      Export: (String)
+     **   Assertion: Get statistics of provinces, a sub-menu for choosing provinces in the first menu
+     */
+
+     FOR Projects
+	  IF number of projects in province
+	  INCREASE projectsInProvince
+		IF projects = "ongoing"
+			INCREASE ongoingProjects
+		ELSE IF projects = "completed"
+			INCREASE completedProjects
+	do
+            PRINT OUT: "\n--- Statistics Menu ---"
+            PRINT OUT: "1. Number of projects in " + province
+            PRINT OUT: "2. Percentage of all projects located in " + province
+            PRINT OUT: "3. Total number and percentage of ongoing projects in " + province
+            PRINT OUT: "4. Total number and percentage of completed projects in " + province
+            PRINT OUT: "5. All of the above statistics"
+            PRINT OUT: "6. Go back to the main menu"
+		
+		PRINT OUT: "Enter your choice"
+		
+		SWITCH CASE (choice)
+		  CASE 1: projectsInProvinceMessage = "Number of projects in " + province + ": " + projectsInProvince
+			    PRINT OUT: projectsInProvinceMessage
+			    writeLog(projectsInProvinceMessage)
+		break
+	  	   CASE 2: provincePercentageMessage = "Percentage of all projects located in " + province + ": " + provincePercentage + "%"
+        		     PRINT OUT: provincePercentageMessage
+             	     writeLog(provincePercentageMessage)
+		break
+		  CASE 3: ongoingProjectsMessage = "Total number and percentage of ongoing projects in " + province + ": " + ongoingProjects + " (" + provinceOngoingPercentage + "%)"
+			    PRINT OUT: ongoingProjectsMessage
+        	 	    writeLog(ongoingProjectsMessage)
+		break
+	  	  CASE 4: completedProjectsMessage = "Total number and percentage of completed projects in " + province + ": " + completedProjects + " (" + provinceCompletedPercentage + "%)"
+        		    PRINT OUT: completedProjectsMessage
+        		    writeLog(completedProjectsMessage)
+		break
+		  CASE 5: projectsInProvinceMessage + provincePercentageMessage + ongoingProjectsMessage + completedProjectsMessage
+			    PRINT OUT: allStatisticsMessage
+			     writeLog(allStatisticsMessage)
+		break
+	  	  CASE 6: System.out.println("Returning to the main menu...");
+		return
+		IF CHOICE != 6
+	  PRINT OUT: "Invalid choice, please try again"
+ /*  -------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
